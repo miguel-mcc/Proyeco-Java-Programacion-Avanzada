@@ -15,30 +15,32 @@
 ---
 
 🛠️ Tecnologías utilizadas
--Java
--NetBeans IDE
+- Java
+- NetBeans IDE
 
 ---
 
 📂 Estructura del proyecto
--src/ 
+- src/ 
 → Código fuente del sistema
--nbproject/ 
+- nbproject/ 
 → Configuración de NetBeans
--archivos .txt 
+- archivos .txt 
 → almacenamiento de datos
 
 ---
 
 🚀 Cómo ejecutar
--Descargar o clonar el repositorio
--Abrir el proyecto en NetBeans
--Ejecutar con RUN
+- Descargar o clonar el repositorio
+- Abrir el proyecto en NetBeans
+- Ejecutar con RUN
 
 ---
 
-👨‍💻 Autor
--Tu nombre
+👨‍💻 Autores
+- Miguel Carvajal
+- Cristobal Ogaz
+- Manuel Campillay
 
 ---
 
