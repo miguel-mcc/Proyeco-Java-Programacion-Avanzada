@@ -21,9 +21,12 @@
 ---
 
 📂 Estructura del proyecto
--src/ → Código fuente del sistema
--nbproject/ → Configuración de NetBeans
--archivos .txt → almacenamiento de datos
+-src/ 
+→ Código fuente del sistema
+-nbproject/ 
+→ Configuración de NetBeans
+-archivos .txt 
+→ almacenamiento de datos
 
 ---
 
