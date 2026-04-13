@@ -45,4 +45,4 @@
 ---
 
 📌 Estado del proyecto
--✔ Finalizado para entrega
+- ✔ Finalizado para entrega
