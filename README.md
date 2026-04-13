@@ -1,12 +1,43 @@
-#Proyecto Java - Programación Avanzada
-Descripción
-Sistema de clientes y tickets desarrollado en Java usando NetBeans.
+📌 Proyecto Java - Sistema de Clientes y Tickets
+---
 
-#Cómo ejecutar
+🧾 Descripción
+Este proyecto es un sistema desarrollado en Java que permite gestionar clientes y tickets de soporte.
+
+---
+
+⚙️ Funcionalidades
+Registro de clientes
+Gestión de tickets
+Búsqueda de información
+Manejo de archivos de texto
+
+---
+
+🛠️ Tecnologías utilizadas
+Java
+NetBeans IDE
+
+---
+
+📂 Estructura del proyecto
+src/ → Código fuente del sistema
+nbproject/ → Configuración de NetBeans
+archivos .txt → almacenamiento de datos
+
+---
+
+🚀 Cómo ejecutar
 Descargar o clonar el repositorio
-Abrir en NetBeans
-Ejecutar proyecto (Run)
+Abrir el proyecto en NetBeans
+Ejecutar con RUN
 
-#Archivos importantes
-src/ → código fuente
-nbproject/ → configuración NetBean
+---
+
+👨‍💻 Autor
+Tu nombre
+
+---
+
+📌 Estado del proyecto
+✔ Finalizado para entrega
