@@ -39,7 +39,7 @@
 
 👨‍💻 Autores
 - Miguel Carvajal
-- Cristobal Ogaz
+- Cristobal Ogaz (?)
 - Manuel Campillay
 
 ---
