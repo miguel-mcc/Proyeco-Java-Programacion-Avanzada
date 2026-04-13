@@ -2,15 +2,15 @@
 ---
 
 🧾 Descripción
--Este proyecto es un sistema desarrollado en Java que permite gestionar clientes y tickets de soporte.
+- Este proyecto es un sistema desarrollado en Java que permite gestionar clientes y tickets de soporte.
 
 ---
 
 ⚙️ Funcionalidades
--Registro de clientes
--Gestión de tickets
--Búsqueda de información
--Manejo de archivos de texto
+- Registro de clientes
+- Gestión de tickets
+- Búsqueda de información
+- Manejo de archivos de texto
 
 ---
 
