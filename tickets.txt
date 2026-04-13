@@ -1,0 +1,4 @@
+1,Arreglo Nintendo WII,Abierto,0,1,0
+2,Arreglo PC,Abierto,0,1,0
+3,Arreglo celular iPhone 16,Abierto,0,1,0
+4,Arreglo Televisi�n Samsung,Abierto,0,1,0
