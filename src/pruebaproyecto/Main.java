@@ -4,6 +4,8 @@ import java.io.UnsupportedEncodingException;
 import java.util.HashMap;
 import java.util.Scanner;
 import javax.swing.JOptionPane;
+import javax.swing.JTextArea;
+import javax.swing.JScrollPane;
 
 public class Main {
 
@@ -26,7 +28,7 @@ public class Main {
         leer.nextLine();
         
         
-        System.out.println("Modo seleccionado: " + modo);
+        
         if (modo == 2)
         {
             System.out.println("Modo seleccionado: " + modo);
@@ -323,23 +325,32 @@ public class Main {
     
     public static void ejecutarModoVentana(HashMap<Integer, Cliente> clientes)
 {
-    JOptionPane.showMessageDialog(null, "Modo ventana activado");
-    
     javax.swing.JFrame frame = new javax.swing.JFrame();
     frame.setAlwaysOnTop(true);
-    frame.setSize(200, 200);
+    frame.setUndecorated(true);
     frame.setLocationRelativeTo(null);
     frame.setVisible(true);
     frame.toFront();
 
+    JOptionPane.showMessageDialog(frame, "Modo ventana activado");
+
     while (true)
     {
-        System.out.println("🔥 ENTRE AL METODO VENTANA 🔥");
         String opcionStr = JOptionPane.showInputDialog(frame,
-        "SISTEMA DE TICKETS\n\n"
+        "======================================\n"
+        + "        SISTEMA DE TICKETS\n"
+        + "======================================\n"
         + "1. Agregar cliente\n"
         + "2. Mostrar clientes\n"
-        + "0. Salir"
+        + "3. Crear ticket\n"
+        + "4. Mostrar tickets\n"
+        + "5. Buscar cliente\n"
+        + "6. Eliminar cliente\n"
+        + "7. Editar cliente\n"
+        + "8. Cerrar ticket\n"
+        + "9. Calificar ticket\n"
+        + "0. Salir\n"
+        + "======================================"
         );
 
         if (opcionStr == null)
@@ -352,7 +363,7 @@ public class Main {
         try {
             opcion = Integer.parseInt(opcionStr);
         } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, "Ingrese un número válido.");
+            JOptionPane.showMessageDialog(frame, "Ingrese un número válido.");
             continue;
         }
 
@@ -360,9 +371,9 @@ public class Main {
         {
             case 1:
                 try {
-                    int id = Integer.parseInt(JOptionPane.showInputDialog("ID:"));
-                    String nombre = JOptionPane.showInputDialog("Nombre:");
-                    String correo = JOptionPane.showInputDialog("Correo:");
+                    int id = Integer.parseInt(JOptionPane.showInputDialog(frame, "ID:"));
+                    String nombre = JOptionPane.showInputDialog(frame, "Nombre:");
+                    String correo = JOptionPane.showInputDialog(frame, "Correo:");
 
                     if (clientes.containsKey(id))
                     {
@@ -372,12 +383,14 @@ public class Main {
 
                     clientes.put(id, new Cliente(id, nombre, correo));
                     JOptionPane.showMessageDialog(frame, "Cliente agregado.");
+
                 } catch (Exception e) {
                     JOptionPane.showMessageDialog(frame, "Error en datos.");
                 }
                 break;
 
             case 2:
+            {
                 StringBuilder lista = new StringBuilder();
 
                 for (Cliente c : clientes.values())
@@ -385,14 +398,236 @@ public class Main {
                     lista.append(c.toString()).append("\n");
                 }
 
+                JTextArea area = new JTextArea(lista.toString());
+                area.setEditable(false);
+                area.setFont(new java.awt.Font("Monospaced", java.awt.Font.PLAIN, 12));
+
+                JScrollPane scroll = new JScrollPane(area);
+                scroll.setPreferredSize(new java.awt.Dimension(600, 400));
+
                 JOptionPane.showMessageDialog(frame,
-                    lista.length() == 0 ? "No hay clientes." : lista.toString());
+                    lista.length() == 0 ? "No hay clientes." : scroll,
+                    "Lista de Clientes",
+                    JOptionPane.INFORMATION_MESSAGE);
+            }
+            break;
+
+            case 3:
+                try {
+                    String desc = JOptionPane.showInputDialog(frame, "Descripción:");
+                    int idCliente = Integer.parseInt(JOptionPane.showInputDialog(frame, "ID Cliente:"));
+
+                    Cliente cli = clientes.get(idCliente);
+
+                    if (cli == null)
+                    {
+                        throw new ClienteNoEncontradoException("Cliente no encontrado");
+                    }
+
+                    new Ticket(desc, 0, cli);
+                    JOptionPane.showMessageDialog(frame, "Ticket creado.");
+
+                } catch (Exception e) {
+                    JOptionPane.showMessageDialog(frame, e.getMessage());
+                }
+                break;
+
+            case 4:
+            {
+                StringBuilder tickets = new StringBuilder();
+
+                for (Cliente cli : clientes.values())
+                {
+                    for (Ticket t : cli.getTickets())
+                    {
+                        tickets.append(t.toString()).append("\n");
+                    }
+                }
+
+                JTextArea area = new JTextArea(tickets.toString());
+                area.setEditable(false);
+                area.setFont(new java.awt.Font("Monospaced", java.awt.Font.PLAIN, 12));
+
+                JScrollPane scroll = new JScrollPane(area);
+                scroll.setPreferredSize(new java.awt.Dimension(600, 400));
+
+                JOptionPane.showMessageDialog(frame,
+                    tickets.length() == 0 ? "No hay tickets." : scroll,
+                    "Lista de Tickets",
+                    JOptionPane.INFORMATION_MESSAGE);
+            }
+            break;
+
+            case 5:
+                try {
+                    int idBuscar = Integer.parseInt(JOptionPane.showInputDialog(frame, "ID a buscar:"));
+                    Cliente c = clientes.get(idBuscar);
+
+                    if (c != null)
+                    {
+                        JTextArea area = new JTextArea(c.toString());
+                        area.setEditable(false);
+                        area.setFont(new java.awt.Font("Monospaced", java.awt.Font.PLAIN, 12));
+
+                        JScrollPane scroll = new JScrollPane(area);
+                        scroll.setPreferredSize(new java.awt.Dimension(400, 250));
+
+                        JOptionPane.showMessageDialog(frame, scroll, "Cliente", JOptionPane.INFORMATION_MESSAGE);
+                    }
+                    else
+                    {
+                        JOptionPane.showMessageDialog(frame, "Cliente no encontrado.");
+                    }
+
+                } catch (Exception e) {
+                    JOptionPane.showMessageDialog(frame, "Error.");
+                }
+                break;
+
+            case 6:
+                try {
+                    int idEliminar = Integer.parseInt(JOptionPane.showInputDialog(frame, "ID a eliminar:"));
+
+                    if (clientes.remove(idEliminar) != null)
+                    {
+                        JOptionPane.showMessageDialog(frame, "Cliente eliminado.");
+                    }
+                    else
+                    {
+                        JOptionPane.showMessageDialog(frame, "Cliente no encontrado.");
+                    }
+
+                } catch (Exception e) {
+                    JOptionPane.showMessageDialog(frame, "Error.");
+                }
+                break;
+
+            case 7:
+                try {
+                    int idEditar = Integer.parseInt(JOptionPane.showInputDialog(frame, "ID cliente:"));
+                    Cliente c = clientes.get(idEditar);
+
+                    if (c != null)
+                    {
+                        String nombre = JOptionPane.showInputDialog(frame, "Nuevo nombre:");
+                        String correo = JOptionPane.showInputDialog(frame, "Nuevo correo:");
+
+                        c.setNombre(nombre);
+                        c.setCorreo(correo);
+
+                        JOptionPane.showMessageDialog(frame, "Cliente actualizado.");
+                    }
+                    else
+                    {
+                        JOptionPane.showMessageDialog(frame, "Cliente no encontrado.");
+                    }
+
+                } catch (Exception e) {
+                    JOptionPane.showMessageDialog(frame, "Error.");
+                }
+                break;
+
+            case 8:
+                try {
+                    int idTicket = Integer.parseInt(JOptionPane.showInputDialog(frame, "ID ticket:"));
+
+                    boolean encontrado = false;
+
+                    for (Cliente cli : clientes.values())
+                    {
+                        for (Ticket t : cli.getTickets())
+                        {
+                            if (t.getIdTicket() == idTicket)
+                            {
+                                t.cerrarTicket();
+                                encontrado = true;
+                                break;
+                            }
+                        }
+                        if (encontrado) break;
+                    }
+
+                    JOptionPane.showMessageDialog(frame,
+                        encontrado ? "Ticket cerrado." : "Ticket no encontrado.");
+
+                } catch (Exception e) {
+                    JOptionPane.showMessageDialog(frame, "Error.");
+                }
+                break;
+
+            case 9:
+                try {
+                    int idTicket = Integer.parseInt(JOptionPane.showInputDialog(frame, "ID ticket:"));
+                    int nota = Integer.parseInt(JOptionPane.showInputDialog(frame, "Nota (1-5):"));
+
+                    boolean encontrado = false;
+
+                    for (Cliente cli : clientes.values())
+                    {
+                        for (Ticket t : cli.getTickets())
+                        {
+                            if (t.getIdTicket() == idTicket)
+                            {
+                                t.calificar(nota);
+                                encontrado = true;
+                                break;
+                            }
+                        }
+                        if (encontrado) break;
+                    }
+
+                    JOptionPane.showMessageDialog(frame,
+                        encontrado ? "Ticket calificado." : "Ticket no encontrado.");
+
+                } catch (Exception e) {
+                    JOptionPane.showMessageDialog(frame, "Error.");
+                }
                 break;
 
             case 0:
                 ArchivoUtil.guardarClientes(clientes);
                 ArchivoUtil.guardarTickets(clientes);
-                JOptionPane.showMessageDialog(frame, "Datos guardados. Saliendo...");
+
+                int totalTickets = 0;
+                int abiertos = 0;
+                int cerrados = 0;
+
+                for (Cliente cli : clientes.values())
+                {
+                    for (Ticket t : cli.getTickets())
+                    {
+                        totalTickets++;
+
+                        if (t.getEstado().equalsIgnoreCase("Abierto"))
+                            abiertos++;
+                        else
+                            cerrados++;
+                    }
+                }
+
+                String resumen =
+                    "======================================\n"
+                    + "        SISTEMA CERRADO\n"
+                    + "======================================\n"
+                    + "📊 RESUMEN FINAL:\n"
+                    + "👥 Clientes registrados: " + clientes.size() + "\n"
+                    + "🎫 Total tickets: " + totalTickets + "\n"
+                    + "🟢 Abiertos: " + abiertos + "\n"
+                    + "🔴 Cerrados: " + cerrados + "\n"
+                    + "======================================\n"
+                    + "   Datos guardados correctamente\n"
+                    + "   Gracias por usar el sistema\n"
+                    + "======================================";
+
+                JTextArea area = new JTextArea(resumen);
+                area.setEditable(false);
+                area.setFont(new java.awt.Font("Monospaced", java.awt.Font.PLAIN, 12));
+
+                JScrollPane scroll = new JScrollPane(area);
+                scroll.setPreferredSize(new java.awt.Dimension(500, 300));
+
+                JOptionPane.showMessageDialog(frame, scroll, "Resumen Final", JOptionPane.INFORMATION_MESSAGE);
+
                 frame.dispose();
                 return;
 
