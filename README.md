@@ -1,7 +1,7 @@
 ## 📌 Proyecto Java - Sistema de Clientes y Tickets
 
 🧾 Descripción
-Este proyecto consiste en un sistema desarrollado en Java que permite gestionar clientes y tickets de soporte.
+- Este proyecto consiste en un sistema desarrollado en Java que permite gestionar clientes y tickets de soporte.
 El sistema permite registrar clientes, crear tickets, cerrarlos y calificarlos, además de generar un resumen final del estado del sistema.
 
 ---
