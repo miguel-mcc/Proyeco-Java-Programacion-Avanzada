@@ -67,7 +67,7 @@ public class Main {
                     leer.nextLine();
 
                     if (clientes.containsKey(id)) {
-                        System.out.println("ID ya existe.");
+                        mostrarMensaje("ID ya existe.", true);
                         break;
                     }
 
@@ -80,7 +80,7 @@ public class Main {
                     Cliente nuevo = new Cliente(id, nombre, correo);
                     clientes.put(id, nuevo);
 
-                    System.out.println("Cliente agregado.");
+                    mostrarMensaje("Cliente agregado.", false);
                     break;
 
                 case 2:
