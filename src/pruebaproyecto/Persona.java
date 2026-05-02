@@ -1,6 +1,6 @@
 package pruebaproyecto;
 
-public class Persona {
+public abstract class Persona {
 
     protected String nombre;
     protected String correo;
