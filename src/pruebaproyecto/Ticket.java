@@ -1,7 +1,7 @@
 package pruebaproyecto;
 
-public class Ticket
-{
+public class Ticket {
+
     private static int contador = 1;
 
     private int idTicket;
@@ -12,12 +12,10 @@ public class Ticket
     private long tiempoCreacion;
     private long tiempoCierre;
     private int satisfaccion;
-    
-    public Ticket(String descripcion, int tiempoRespuesta, Cliente cliente)
-    {
-        this.idTicket = contador;
-        contador++;
 
+    public Ticket(String descripcion, int tiempoRespuesta, Cliente cliente) {
+
+        this.idTicket = contador++;
         this.descripcion = descripcion;
         this.estado = "Abierto";
         this.tiempoCreacion = System.currentTimeMillis();
@@ -25,7 +23,7 @@ public class Ticket
         this.tiempoRespuesta = 0;
         this.cliente = cliente;
         this.satisfaccion = 0;
-        
+
         cliente.agregarTicket(this);
     }
 
@@ -69,58 +67,53 @@ public class Ticket
         this.cliente = cliente;
     }
 
-    public void cerrarTicket()
-    {
-    if (estado.equals("Abierto"))
-    {
-        estado = "Cerrado";
-        tiempoCierre = System.currentTimeMillis();
-        tiempoRespuesta = (int) ((tiempoCierre - tiempoCreacion) / 1000); // en segundos
-    } else
-    {
-        System.out.println("El ticket ya está cerrado.");
-    }
-    }
-    
-    public int getSatisfaccion()
-    {
+    public int getSatisfaccion() {
         return satisfaccion;
     }
-    
-    public void setSatisfaccion(int satisfaccion)
-    {
+
+    public void setSatisfaccion(int satisfaccion) {
         this.satisfaccion = satisfaccion;
     }
-    
-    public void calificar(int nota)
-    {
-    if (!estado.equals("Cerrado"))
-    {
-        System.out.println("Solo se puede calificar tickets cerrados.");
-        return;
+
+    public void cerrarTicket() {
+        if (estado.equals("Abierto")) {
+            estado = "Cerrado";
+            tiempoCierre = System.currentTimeMillis();
+            tiempoRespuesta = (int) ((tiempoCierre - tiempoCreacion) / 1000);
+        } else {
+            System.out.println("El ticket ya está cerrado.");
+        }
     }
 
-    if (nota >= 1 && nota <= 5)
-    {
-        this.satisfaccion = nota;
-    } 
-    else 
-    {
+    public boolean calificar(int nota) {
+
+        if (!estado.equals("Cerrado")) {
+            System.out.println("Solo se puede calificar tickets cerrados.");
+            return false;
+        }
+
+        if (nota >= 1 && nota <= 5) {
+            this.satisfaccion = nota;
+            return true;
+        }
+
         System.out.println("La nota debe ser entre 1 y 5.");
+        return false;
     }
-}
-    
-    
-    
+
+    // =========================
+    // TO STRING (MEJORADO)
+    // =========================
+
     @Override
-    public String toString()
-    {
-    return "\n------------------------------"
-         + "\n Ticket #" + idTicket
-         + "\n Cliente  : " + cliente.getNombre()
-         + "\n Estado   : " + estado
-         + "\n Descripción: " + descripcion
-         + "\n Satisfacción: " + satisfaccion
-         + "\n------------------------------\n";
+    public String toString() {
+
+        return "\n------------------------------"
+             + "\n 🎫 Ticket #" + idTicket
+             + "\n 👤 Cliente  : " + cliente.getNombre()
+             + "\n Estado   : " + (estado.equalsIgnoreCase("Abierto") ? "🟢 Abierto" : "🔴 Cerrado")
+             + "\n 📝 Descripción: " + descripcion
+             + "\n ⭐ Satisfacción: " + satisfaccion
+             + "\n------------------------------\n";
     }
 }

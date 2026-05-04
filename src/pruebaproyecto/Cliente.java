@@ -32,74 +32,67 @@ public class Cliente extends Persona {
     public void agregarTicket(Ticket t) {
         tickets.add(t);
     }
-    
-    
-    
-    
 
     // =========================
-    // TO STRING (IMPORTANTE)
+    // TO STRING (MEJORADO)
     // =========================
     @Override
-public String toString() {
+    public String toString() {
 
-    StringBuilder abiertos = new StringBuilder();
-    StringBuilder cerrados = new StringBuilder();
+        StringBuilder abiertos = new StringBuilder();
+        StringBuilder cerrados = new StringBuilder();
 
-    for (Ticket t : tickets) {
+        for (Ticket t : tickets) {
 
-        String info = "\n - ID: " + t.getIdTicket()
-                    + " | " + t.getDescripcion();
+            String info = "\n  • 🎫 Ticket #" + t.getIdTicket()
+                        + " → " + t.getDescripcion();
 
-        if ("Abierto".equalsIgnoreCase(t.getEstado())) {
-            abiertos.append(info);
-        } else {
-            cerrados.append(info);
+            if ("Abierto".equalsIgnoreCase(t.getEstado())) {
+                abiertos.append(info);
+            } else {
+                cerrados.append(info);
+            }
         }
-    }
 
-    if (abiertos.length() == 0) {
-        abiertos.append("\n - Ninguno");
-    }
+        if (abiertos.length() == 0) {
+            abiertos.append("\n  • (Ninguno)");
+        }
 
-    if (cerrados.length() == 0) {
-        cerrados.append("\n - Ninguno");
-    }
+        if (cerrados.length() == 0) {
+            cerrados.append("\n  • (Ninguno)");
+        }
 
-    return "\n=============================="
-         + "\n        CLIENTE #" + id
-         + "\n=============================="
-         + "\n Nombre : " + getNombre()
-         + "\n Correo : " + getCorreo()
-         + "\n\n TICKETS ABIERTOS:" + abiertos
-         + "\n\n TICKETS CERRADOS:" + cerrados
-         + "\n==============================\n";
-}
+        return "\n======================================"
+             + "\n        👤 CLIENTE #" + id
+             + "\n======================================"
+             + "\n 📛 Nombre : " + getNombre()
+             + "\n 📧 Correo : " + getCorreo()
+             + "\n\n 🟢 TICKETS ABIERTOS:" + abiertos
+             + "\n\n 🔴 TICKETS CERRADOS:" + cerrados
+             + "\n======================================\n";
+    }
 
     // =========================
-    // SOBRECARGA (SIA-5)
+    // SOBRECARGA
     // =========================
 
-    // 1. Mostrar básico
     public void mostrar() {
         System.out.println(this.toString());
     }
 
-    // 2. Mostrar con detalle
     public void mostrar(boolean detalle) {
         if (detalle) {
-            System.out.println("=== CLIENTE DETALLADO ===");
-            System.out.println("ID: " + id);
-            System.out.println("Nombre: " + getNombre());
-            System.out.println("Correo: " + getCorreo());
-            System.out.println("Tickets: " + tickets.size());
+            System.out.println("=== 👤 CLIENTE DETALLADO ===");
+            System.out.println("🆔 ID: " + id);
+            System.out.println("📛 Nombre: " + getNombre());
+            System.out.println("📧 Correo: " + getCorreo());
+            System.out.println("🎫 Tickets: " + tickets.size());
         } else {
             mostrar();
         }
     }
 
-    // 3. Mostrar con mensaje personalizado
     public void mostrar(String mensaje) {
-        System.out.println(mensaje + ": " + getNombre() + " (" + id + ")");
+        System.out.println("🔎 " + mensaje + ": " + getNombre() + " (" + id + ")");
     }
 }

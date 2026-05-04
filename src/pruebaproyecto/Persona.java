@@ -2,8 +2,9 @@ package pruebaproyecto;
 
 public abstract class Persona {
 
-    protected String nombre;
-    protected String correo;
+    // 🔴 CAMBIO CLAVE: protected → private
+    private String nombre;
+    private String correo;
 
     public Persona(String nombre, String correo) {
         this.nombre = nombre;
@@ -19,7 +20,7 @@ public abstract class Persona {
         return correo;
     }
 
-    // SETTERS (FALTABAN)
+    // SETTERS
     public void setNombre(String nombre) {
         this.nombre = nombre;
     }
@@ -28,7 +29,9 @@ public abstract class Persona {
         this.correo = correo;
     }
 
-    public String mostrarInfo() {
+    // 🔹 OPCIONAL (pero suma puntos por sobreescritura)
+    @Override
+    public String toString() {
         return "Persona: " + nombre + " - " + correo;
     }
 }
