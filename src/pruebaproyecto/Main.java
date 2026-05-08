@@ -12,13 +12,23 @@ public class Main {
     // =========================
     // MÉTODOS AUXILIARES
     // =========================
-    
+    /**
+     * Gestiona la persistencia automática de los datos del sistema.
+     * Invoca el guardado tanto de la colección de clientes como de sus tickets asociados
+     * en archivos de texto externos.
+     * @param clientes Mapa que contiene la base de datos de clientes actual.
+     */
     public static void autoGuardar(HashMap<Integer, Cliente> clientes) {
     ArchivoUtil.guardarClientes(clientes);
     ArchivoUtil.guardarTickets(clientes);
 }
     
-    
+    /**
+     * Realiza una búsqueda transversal en todas las listas de tickets de los clientes.
+     * @param clientes Colección donde se buscará el ticket.
+     * @param id Identificador único del ticket a localizar.
+     * @return El objeto {@code Ticket} encontrado, o {@code null} si no existe.
+     */
     public static Ticket buscarTicket(HashMap<Integer, Cliente> clientes, int id) {
         for (Cliente c : clientes.values()) {
             for (Ticket t : c.getTickets()) {
