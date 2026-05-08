@@ -1,8 +1,12 @@
 package pruebaproyecto;
 
+/**
+ * Representa la entidad base del sistema utilizando el concepto de Abstracción.
+ * Define los atributos y comportamientos comunes para cualquier individuo
+ * sirviendo como clase padre para la especialización de roles como Clientes.
+ */
 public abstract class Persona {
 
-    // 🔴 CAMBIO CLAVE: protected → private
     private String nombre;
     private String correo;
 
@@ -29,7 +33,7 @@ public abstract class Persona {
         this.correo = correo;
     }
 
-    // 🔹 OPCIONAL (pero suma puntos por sobreescritura)
+    // sobreescritura
     @Override
     public String toString() {
         return "Persona: " + nombre + " - " + correo;
