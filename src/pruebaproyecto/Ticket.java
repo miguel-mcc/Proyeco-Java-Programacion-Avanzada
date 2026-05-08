@@ -74,7 +74,11 @@ public class Ticket {
     public void setSatisfaccion(int satisfaccion) {
         this.satisfaccion = satisfaccion;
     }
-
+    /**
+     * Finaliza el ciclo de vida de un ticket.
+     * Cambia el estado a 'Cerrado' y calcula automáticamente el tiempo de respuesta
+     * basado en la diferencia entre la creación y el cierre.
+     */
     public void cerrarTicket() {
         if (estado.equals("Abierto")) {
             estado = "Cerrado";
@@ -84,7 +88,12 @@ public class Ticket {
             System.out.println("El ticket ya está cerrado.");
         }
     }
-
+    /**
+     * Asigna una nota de satisfacción al servicio prestado.
+     * @param nota Valor numérico entre 1 y 5.
+     * @return {@code true} si la calificación fue exitosa, {@code false} si el ticket 
+     * no está cerrado o la nota está fuera de rango.
+     */
     public boolean calificar(int nota) {
 
         if (!estado.equals("Cerrado")) {
