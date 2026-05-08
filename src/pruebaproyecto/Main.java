@@ -176,17 +176,22 @@ public class Main {
                     break;
 
                 case 5:
-                    System.out.print("ID: ");
-                    int buscar = leer.nextInt();
-                    leer.nextLine();
-
-                    Cliente encontrado = clientes.get(buscar);
-
-                    if (encontrado != null) {
-                        System.out.println("Encontrado:");
-                        System.out.println(encontrado);
-                    } else {
-                        System.out.println("Cliente no encontrado.");
+                    System.out.print("ID del cliente a buscar: ");
+                    try {
+                        int buscar = Integer.parseInt(leer.nextLine());
+                        Cliente encontrado = clientes.get(buscar);
+        
+                        if (encontrado == null) {
+                            // Lanzamos excepción personalizada
+                            throw new ClienteNoEncontradoException("No existe un cliente con el ID " + buscar);
+                        }
+                        encontrado.mostrar();
+        
+                    } catch (NumberFormatException e) {
+                    System.out.println("[ERROR] Debe ingresar un número válido.");
+                    } catch (ClienteNoEncontradoException e) {
+                        // Atrapamos excepción y mostramos el mensaje
+                        System.out.println("[ERROR DE NEGOCIO] " + e.getMessage());
                     }
                     break;
 
@@ -273,13 +278,21 @@ public class Main {
                     break;
 
                 case 10:
-                    System.out.print("ID ticket: ");
-                    int idBuscarT = leer.nextInt();
-                    leer.nextLine();
-
-                    Ticket tBuscado = buscarTicket(clientes, idBuscarT);
-
-                    System.out.println(tBuscado != null ? tBuscado : "Ticket no encontrado.");
+                    System.out.print("ID del ticket a buscar: ");
+                    try {
+                        int idT = Integer.parseInt(leer.nextLine());
+                        Ticket tEncontrado = buscarTicket(clientes, idT);
+        
+                        if (tEncontrado == null) {
+                            throw new TicketNoEncontradoException("El ticket #" + idT + " no existe en el sistema.");
+                        }
+                        System.out.println(tEncontrado);
+        
+                    } catch (NumberFormatException e) {
+                        System.out.println("[ERROR] Ingrese un ID numérico.");
+                    } catch (TicketNoEncontradoException e) {
+                        System.out.println("[ERROR DE NEGOCIO] " + e.getMessage());
+                    }
                     break;
 
                 case 11:
