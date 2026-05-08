@@ -11,6 +11,11 @@ public class ArchivoUtil {
     // =========================
     // GUARDAR CLIENTES
     // =========================
+    /**
+     * Exporta la información de los clientes a un archivo plano.
+     * Utiliza {@code BufferedWriter} para asegurar una escritura eficiente de los datos.
+     * @param clientes Mapa de clientes a serializar en el archivo TXT.
+     */
     public static void guardarClientes(HashMap<Integer, Cliente> clientes) {
 
         try (BufferedWriter bw = new BufferedWriter(new FileWriter(ARCHIVO_CLIENTES))) {
